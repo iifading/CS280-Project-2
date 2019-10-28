@@ -1,0 +1,13 @@
+STR(a regular string)
+STR(skipping
+to a new line)
+STR(this is a \ backslash)
+STR(did this work? ... "maybe")
+STRINGS:
+a regular string
+did this work? ... "maybe"
+skipping
+to a new line
+this is a \ backslash
+Lines: 4
+Tokens: 4

@@ -1,0 +1,3 @@
+"be sure to #include lex.h in every file"
+"or it won't work"
+"and this // is not a comment!"

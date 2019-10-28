@@ -1,0 +1,13 @@
+// this might be a program
+
+let x 10;
+let y 20;
+print x+y;
+
+if x begin let y "no way"; end
+
+print x
+
+if true begin
+print "done"
+end

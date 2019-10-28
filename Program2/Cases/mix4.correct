@@ -1,0 +1,29 @@
+LET
+ID(a)
+STR(zoom)
+SC
+LET
+ID(d)
+STR(zoom)
+STAR
+INT(2)
+SC
+LET
+ID(m)
+ID(d)
+PLUS
+ID(a)
+PLUS
+STR(a)
+PLUS
+ID(a)
+SC
+ID(what)
+ID(was)
+ID(that)
+ID(name3)
+ID(name100)
+MINUS
+ID(name)
+Lines: 7
+Tokens: 27

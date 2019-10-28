@@ -1,0 +1,93 @@
+ASSIGNMENT=2
+
+ex=./a.out
+
+[ ! -e $ex ] && echo Cannot find the program, please build it! && exit 1
+
+ofile=`mktemp`
+
+printonly=no
+[ "$1" = "-show" ] && printonly=yes && shift
+
+errorcase=0
+
+declare -a cases
+cases[badarg1]="-nosuch"
+cases[badarg2]="-v -badarg empty.txt"
+cases[badfile]="noSuchFile"
+cases[toomanyfile]="good.txt noSuchFile"
+cases[emptyfile]="empty.txt"
+cases[spacesfile]="-v spaces.txt"
+
+cases[stringok]="-consts strings.txt"
+cases[stringbad1]="badstr.txt"
+cases[stringbad2]="-v badstr.txt"
+cases[comments]="-v comments"
+cases[cominstring]="-v cominstring"
+cases[stringesc]="-consts -v stringesc"
+cases[items1]="-v -ids items1"
+cases[items2]="-ids -v < items2"
+cases[items3]="-ids items3"
+cases[items4]="-consts -ids -ids < items4"
+
+cases[mix1]="mix1"
+cases[mix2]="< mix2"
+cases[mix3]="mix3"
+cases[mix4]="-v mix4"
+cases[mix5]="-ids mix5"
+cases[err1]="err1"
+cases[err2]="-v err2"
+cases[err3]="err3"
+cases[err4]="-consts err4"
+cases[err5]="-v err5"
+
+args=""
+if [ $# -eq 1 ];
+then
+	if [ ${cases[$1]+_} ];
+	then
+		args=${cases[$1]}
+	fi
+fi
+
+if [ "$args" = "" ];
+then
+	echo Case $1 not found
+	echo
+	echo Test cases are:
+	for v in "${!cases[@]}" ;
+	do
+		echo $v: prog2 ${cases[$v]}
+	done
+	exit 0
+fi
+
+[ $printonly = "yes" ] && echo prog2 $args && exit
+
+echo RUNNING prog$ASSIGNMENT $args
+
+score=0
+
+	eval $ex $args 2>&1 | tee $ofile
+
+rc=0
+if [ $errorcase -eq 0 ] ;
+then
+    diff $ofile ${1}.correct
+    rc=$?
+else
+    segs=$(grep "Segment" $ofile | wc -l)
+    errs=$(grep ": RUNTIME ERROR " $ofile | egrep '[0-9]+: .*' | wc -l)
+    diff <(cat $ofile | head -n -1) <(cat ${1}.correct | head -n -1)
+    drc=$?
+    if [ $errs -ne 1 -o $segs -ne 0 -o $drc -ne 0 ]; then rc=1; fi
+fi
+
+
+[ $rc -eq 0 ] && score=1
+
+echo RESULT: $1 "[ " $score " / 1 ]"
+
+rm $ofile
+
+exit $rc

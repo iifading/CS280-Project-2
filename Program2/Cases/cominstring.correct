@@ -1,0 +1,5 @@
+STR(be sure to #include lex.h in every file)
+STR(or it won't work)
+STR(and this // is not a comment!)
+Lines: 3
+Tokens: 3

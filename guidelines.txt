@@ -1,0 +1,84 @@
+Part 1 (Oct 16)
+    -Compiles
+    -badarg1, badarg2
+    -badfile, toomanyfile
+
+Part 2 (Oct 23)
+    -All part1 cases
+    -emptyfile, spacefile
+    -Comments
+    -items1
+    -mix5
+    -err2
+    -err5
+
+Part 3 (Oct 30)
+    -All part2 cases
+    -All remaining cases
+
+
+optional cmd line arguments
+    -v          Print each token as seen, one per line  (#0)
+                For tokens ID, INT, STR, and ERR, also
+                print a space, then the associated 
+                lexeme in parens.
+    
+    -consts     Print all unique STRs in abc order      (#1)
+                One string per line.
+                Then, print all integer constants,
+                in numerical order, one string per line
+                Print nothing if STRs or INTs are 
+                absent
+    
+    -ids        Print all identifiers in abc order      (#2)
+                as a comma-separated list
+                Print nothing if IDs are absent
+
+    filename    
+
+    Flag arguments can appear in any order, but filename must be last
+
+    Unrecognized flags are handled by printing
+        UNRECOGNIZED FLAG {arg}
+    and terminate
+
+    At most one file allowed, handled by printing
+        ONLY ONE FILE NAME ALLOWED
+    and terminate
+
+    If cannot open filename, handle by printing
+        CANNOT OPEN {arg}
+    and terminate
+
+
+
+Lexical Rules of the Language
+    1. Identifiers must be in format [a-zA-Z][a-zA-Z0-9]*  Token=ID
+    2. Integer constants are in format [0-9]+ Token=INT
+    3. Strings are in format ".*"
+    4. String allow escape sequences of format \.
+    5. Reserved keywords:
+        print   Token=PRINT
+        let     Token=LET
+        if      Token=IF
+        loop    Token=LOOP
+        begin   Token=BEGIN
+        end     Token=END
+    6. Operators:
+        +       Token=PLUS
+        -       Token=MINUS
+        *       Token=STAR
+        /       Token=SLASH
+        !       Token=BANG
+        (       Token=LPAREN
+        )       Token=RPAREN
+        ;       Token=SC
+    7. Comments are of format //.*\n
+       NOTE a // in a STR is not a comment!
+    8. Whitespace delimits tokens
+    9. Errors will be denoted by Token=ERR
+    10. End of file will be denoted by the DONE token
+
+    Once ERR or DONE is met, escape the function
+
+    If num of lines == 0, don't print anything.

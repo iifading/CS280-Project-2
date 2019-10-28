@@ -1,0 +1,19 @@
+ID(foo)
+ID(foo)
+ID(foo)
+PLUS
+MINUS
+PLUS
+PLUS
+BANG
+STAR
+PLUS
+STAR
+STAR
+INT(2)
+SLASH
+INT(2)
+STR(bye!)
+IDENTIFIERS: foo
+Lines: 7
+Tokens: 16
